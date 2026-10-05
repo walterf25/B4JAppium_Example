@@ -1,0 +1,77 @@
+﻿AppType=JavaFX
+Build1=Default,com.genesis.appium
+File1=active-app.json
+File2=automotive-demo.json
+File3=login-and-wizard.json
+File4=MainPage.bjl
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+FileGroup4=New Group
+Group=Default Group
+Library1=b4xappium
+Library2=b4xpages
+Library3=byteconverter
+Library4=jcore
+Library5=jfx
+Library6=jokhttputils2
+Library7=json
+Module1=AppConfig
+Module2=AutomotiveTest
+Module3=|relative|..\B4XMainPage
+Module4=RecipeRunner
+NumberOfFiles=4
+NumberOfLibraries=7
+NumberOfModules=4
+Version=10.7
+@EndOfDesignText@
+#Region Project Attributes 
+	#MainFormWidth: 600
+	#MainFormHeight: 600 
+#End Region
+
+#AdditionalJar: failsafe-3.3.2.jar
+#AdditionalJar: guava-32.1.2-jre.jar
+'''#AdditionalJar: commons-logging-1.2.jar
+#AdditionalJar: selenium-json-4.32.0.jar
+#AdditionalJar: extentreports-5.1.2.jar
+#AdditionalJar: freemarker-2.3.34.jar
+#AdditionalJar: rxjava-3.1.10.jar
+#AdditionalJar: reactive-streams-1.0.4.jar
+
+Sub Process_Globals
+	Private fx As JFX
+	Private MainForm As Form
+	Public StartupArgs() As String
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	StartupArgs = Args
+	MainForm = Form1
+	MainForm.Show
+	Dim PagesManager As B4XPagesManager
+	PagesManager.Initialize(MainForm)
+End Sub
+
+'Template version: B4J-1.0
+#Region Delegates
+Sub MainForm_FocusChanged (HasFocus As Boolean)
+	B4XPages.Delegate.MainForm_FocusChanged(HasFocus)
+End Sub
+
+Sub MainForm_Resize (Width As Double, Height As Double)
+	B4XPages.Delegate.MainForm_Resize(Width, Height)
+End Sub
+
+Sub MainForm_Closed
+	B4XPages.Delegate.MainForm_Closed
+End Sub
+
+Sub MainForm_CloseRequest (EventData As Event)
+	B4XPages.Delegate.MainForm_CloseRequest(EventData)
+End Sub
+
+Public Sub MainForm_IconifiedChanged (Iconified As Boolean)
+	B4XPages.Delegate.MainForm_IconifiedChanged(Iconified)
+End Sub
+#End Region

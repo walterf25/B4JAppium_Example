@@ -1,0 +1,75 @@
+{
+  "schema": 2,
+  "name": "BLE Observer - Connect + Full Screen Navigation",
+  "onFailure": "stop",
+  "steps": [
+    { "name": "Wait for Connect screen", "screen": "Connect", "action": "waitFor", "locatorType": "text", "locator": "BLE State", "timeoutSec": 20 },
+
+    { "name": "Wait for Ranger-ESP32 in device list (scan auto-starts on launch, no Scan button to tap; skipping the pre-scan screenshot since the device is usually already listed by the time we'd take it)", "screen": "Connect", "action": "waitFor", "locatorType": "uiSelector", "locator": "new UiSelector().textContains(\"Ranger\")", "timeoutSec": 30 },
+    { "screen": "Connect", "action": "screenshot", "name": "Connect_DeviceFound" },
+
+    { "name": "Tap Ranger-ESP32 device row", "screen": "Connect", "action": "tap", "locatorType": "uiSelector", "locator": "new UiSelector().textContains(\"Ranger\")" },
+    { "screen": "Connect", "action": "sleep", "ms": 500 },
+    { "screen": "Connect", "action": "screenshot", "name": "Connect_ConfirmDialog" },
+
+    { "name": "Confirm connect (dialog button renders uppercase: 'YES')", "screen": "Connect", "action": "tap", "locatorType": "text", "locator": "YES" },
+
+    { "name": "Settle after connect (lands on whatever screen Starter.sLastScreen persisted, not always Readings; no screenshot here - whichever screen it is gets its own screenshot below)", "screen": "Connect", "action": "sleep", "ms": 3000 },
+
+    { "name": "Open menu", "screen": "Readings", "action": "tap", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]" },
+    { "name": "Wait for drawer (About is never excluded except on the About screen itself)", "screen": "Readings", "action": "waitFor", "locatorType": "text", "locator": "About", "timeoutSec": 10 },
+    { "name": "Tap Readings if not already there (self-excluded from its own menu when we land on it)", "screen": "Readings", "action": "tapIfPresent", "locatorType": "text", "locator": "Readings" },
+    { "name": "Close menu if the Readings tap above was skipped and left it open", "screen": "Readings", "action": "closeMenuIfOpen", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]", "marker": "About" },
+    { "screen": "Readings", "action": "sleep", "ms": 800 },
+    { "screen": "Readings", "action": "screenshot", "name": "Readings_Screen" },
+
+    { "name": "Open menu", "screen": "Readings", "action": "tap", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]" },
+    { "name": "Wait for drawer", "screen": "Readings", "action": "waitFor", "locatorType": "text", "locator": "About", "timeoutSec": 10 },
+    { "name": "Tap Graphic", "screen": "Graphic", "action": "tap", "locatorType": "text", "locator": "Graphic" },
+    { "name": "Let the chart accumulate real data points before capturing (chart shows a rolling ~30s window)", "screen": "Graphic", "action": "sleep", "ms": 15000 },
+    { "screen": "Graphic", "action": "screenshot", "name": "Graphic_Chart" },
+
+    { "name": "Switch to gauge view (button toggles Show Gauge <-> Show Chart)", "screen": "Graphic", "action": "tap", "locatorType": "text", "locator": "Show Gauge" },
+    { "name": "Let the needle settle on a live reading", "screen": "Graphic", "action": "sleep", "ms": 3000 },
+    { "screen": "Graphic", "action": "screenshot", "name": "Graphic_Gauge" },
+
+    { "name": "Open menu", "screen": "Graphic", "action": "tap", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]" },
+    { "name": "Wait for drawer", "screen": "Graphic", "action": "waitFor", "locatorType": "text", "locator": "About", "timeoutSec": 10 },
+    { "name": "Tap Timed Count", "screen": "Timed Count", "action": "tap", "locatorType": "text", "locator": "Timed Count" },
+    { "screen": "Timed Count", "action": "sleep", "ms": 800 },
+    { "screen": "Timed Count", "action": "screenshot", "name": "TimedCount_Screen" },
+
+    { "name": "Open menu", "screen": "Timed Count", "action": "tap", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]" },
+    { "name": "Wait for drawer", "screen": "Timed Count", "action": "waitFor", "locatorType": "text", "locator": "About", "timeoutSec": 10 },
+    { "name": "Tap Settings...", "screen": "Settings", "action": "tap", "locatorType": "text", "locator": "Settings..." },
+    { "screen": "Settings", "action": "sleep", "ms": 800 },
+    { "screen": "Settings", "action": "screenshot", "name": "Settings_Screen" },
+
+    { "name": "Open menu", "screen": "Settings", "action": "tap", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]" },
+    { "name": "Wait for drawer", "screen": "Settings", "action": "waitFor", "locatorType": "text", "locator": "About", "timeoutSec": 10 },
+    { "name": "Tap File Manager...", "screen": "File Manager", "action": "tap", "locatorType": "text", "locator": "File Manager..." },
+    { "screen": "File Manager", "action": "sleep", "ms": 800 },
+    { "screen": "File Manager", "action": "screenshot", "name": "FileManager_Screen" },
+
+    { "name": "Open menu", "screen": "File Manager", "action": "tap", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]" },
+    { "name": "Wait for drawer", "screen": "File Manager", "action": "waitFor", "locatorType": "text", "locator": "About", "timeoutSec": 10 },
+    { "name": "Tap About", "screen": "About", "action": "tap", "locatorType": "text", "locator": "About" },
+    { "screen": "About", "action": "sleep", "ms": 800 },
+    { "screen": "About", "action": "screenshot", "name": "About_Screen" },
+
+    { "name": "Open menu", "screen": "About", "action": "tap", "locatorType": "xpath", "locator": "//*[@resource-id=\"android:id/action_bar\"]//android.widget.ImageView[@clickable=\"true\"]" },
+    { "name": "Wait for drawer (Help is never excluded except on the Help screen itself)", "screen": "About", "action": "waitFor", "locatorType": "text", "locator": "Help", "timeoutSec": 10 },
+    { "name": "Tap Help", "screen": "Help", "action": "tap", "locatorType": "text", "locator": "Help" },
+    { "screen": "Help", "action": "sleep", "ms": 800 },
+    { "screen": "Help", "action": "screenshot", "name": "Help_Screen" },
+
+    { "name": "Back #1: pops the Settings/File Manager/About/Help group back to the last tab screen (Readings/Graphic/Timed Count)", "screen": "Connect", "action": "back" },
+    { "name": "Back #2: pops from the tab screen back to Connect", "screen": "Connect", "action": "back" },
+    { "name": "Confirm we're back on Connect", "screen": "Connect", "action": "waitFor", "locatorType": "text", "locator": "BLE State", "timeoutSec": 10 },
+    { "screen": "Connect", "action": "screenshot", "name": "Connect_Final" },
+
+    { "name": "Disconnect so the next run starts clean (device re-appears in Devices Found instead of staying connected)", "screen": "Connect", "action": "tapIfPresent", "locatorType": "text", "locator": "Disconnect" },
+    { "screen": "Connect", "action": "sleep", "ms": 1500 },
+    { "screen": "Connect", "action": "screenshot", "name": "Connect_Disconnected" }
+  ]
+}

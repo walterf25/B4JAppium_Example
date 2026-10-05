@@ -1,0 +1,16 @@
+{
+  "appId": "automotive-demo",
+  "displayName": "Strom Ergonomics Automotive Demo",
+  "platformName": "Android",
+  "automationName": "UiAutomator2",
+  "appPackage": "com.automotive.demo",
+  "appPath": "C:\\Users\\Walter\\Documents\\Tros.ai\\Tros.ai Automotive\\Tros.ai\\StromErgonomics_02_16_2004_v2.0.3_Release\\Objects\\StromErgonimics.apk",
+  "deviceName": "R5CTC1JMZCR",
+  "appiumHost": "http://127.0.0.1",
+  "appiumPort": 4723,
+  "basePath": "",
+  "extraCapabilities": { "autoGrantPermissions": true },
+  "recipes": ["login-and-wizard.json"],
+  "reportName": "test-report.html",
+  "stopOnRecipeFailure": true
+}

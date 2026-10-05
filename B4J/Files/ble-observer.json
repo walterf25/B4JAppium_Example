@@ -1,0 +1,16 @@
+{
+  "appId": "ble-observer",
+  "displayName": "Observer BLE",
+  "platformName": "Android",
+  "automationName": "UiAutomator2",
+  "appPackage": "sei.observerble2",
+  "appPath": "C:\\Users\\Walter\\Documents\\B4X_Projects\\BLE_Observer\\B4A\\Objects\\BLE_Observer.apk",
+  "deviceName": "R3GL105QLNZ",
+  "appiumHost": "http://127.0.0.1",
+  "appiumPort": 4723,
+  "basePath": "",
+  "extraCapabilities": { "autoGrantPermissions": true, "noReset": true },
+  "recipes": ["ble-observer-full-navigation.json"],
+  "reportName": "ble-observer-report.html",
+  "stopOnRecipeFailure": true
+}
